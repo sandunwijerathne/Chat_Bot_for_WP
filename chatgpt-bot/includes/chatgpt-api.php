@@ -10,7 +10,7 @@ add_action('rest_api_init', function () {
 function custom_chatgpt_handler($request) {
     $body = $request->get_json_params();
     $message = sanitize_text_field($body['message']);
-
+    $siteurl = site_url();
     $pages = get_all_formatted_slugs();
     $content = "";
 
@@ -33,7 +33,7 @@ function custom_chatgpt_handler($request) {
         'body' => json_encode([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'system', 'content' => "You are a helpful assistant for TPT Tours in Sri Lanka. Use the following content to answer questions. When you mention any webpage, tour, or resource, always include it as an HTML link using <a href=\"https://...\">Link Text</a>. Do not provide plain URLs or Markdown. Only respond using valid HTML for links, lists, and text formatting.\n\n.$content"],
+                ['role' => 'system', 'content' => "You are a helpful assistant for TPT Tours in Sri Lanka the site".$siteurl.". Use the following content to answer questions. When you mention any webpage, tour, or resource, always include it as an HTML link using <a href=\"https://...\">Link Text</a>. Do not provide plain URLs or Markdown. Only respond using valid HTML for links, lists, and text formatting.\n\n.$content"],
                 ['role' => 'user', 'content' => $message],
             ],
         ]),
