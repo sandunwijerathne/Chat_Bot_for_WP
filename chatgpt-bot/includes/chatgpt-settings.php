@@ -9,6 +9,8 @@ add_action('admin_init', function () {
     register_setting('chatgpt_bot_options', 'chatgpt_api_key');
     register_setting('chatgpt_bot_options', 'chatgpt_bot_logo');
     register_setting('chatgpt_bot_options', 'chatgpt_bot_name');
+    register_setting('chatgpt_bot_options', 'chatgpt_system_prompt');
+
 });
 
 // Admin page content
@@ -50,6 +52,13 @@ function chatgpt_bot_settings_page() {
     <td>
         <input type="text" name="chatgpt_bot_name" value="<?php echo esc_attr(get_option('chatgpt_bot_name', 'TPT Bot')); ?>" style="width: 400px;" />
         <p class="description">This name appears at the top of the chat box (e.g., TPT Bot, Travel Assistant, etc.).</p>
+    </td>
+</tr>
+<tr valign="top">
+    <th scope="row">System Instruction</th>
+    <td>
+        <textarea name="chatgpt_system_prompt" rows="6" style="width: 100%;"><?php echo esc_textarea(get_option('chatgpt_system_prompt', 'You are a helpful assistant for TPT Tours. Use the following content to answer questions. When you mention any webpage, tour, or resource, always include it as an HTML link using <a href=\"https://...\">Link Text</a>. Do not provide plain URLs or Markdown. Only respond using valid HTML for links, lists, and text formatting.')); ?></textarea>
+        <p class="description">This message is sent to ChatGPT as the system instruction. You can customize tone, behavior, etc.</p>
     </td>
 </tr>
             </table>

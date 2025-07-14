@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: ChatGPT Bot
-Plugin URI: https://github.com/sandunwijerathne/Chat_Bot_for_WP
+Plugin Name: ChatGPT Tour Bot
+Plugin URI: https://github.com/yourusername/chatgpt-tour-bot
 Description: A chatbot plugin for WordPress that integrates with ChatGPT and uses site content to answer visitor questions.
 Version: 1.0
-Author: Sandun Wijerathne
-Author URI: https://www.linkedin.com/in/sandun-wijerathne/
+Author: IdealWebKit 
+Author URI: https://idealwebkit.com/
 License: GPLv2 or later
 */
 

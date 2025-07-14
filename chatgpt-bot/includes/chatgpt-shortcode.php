@@ -5,10 +5,11 @@ function render_chatgpt_in_footer() {
 
     wp_localize_script('chatgpt-script', 'chatgptAjax', [
         'ajaxUrl' => site_url('/wp-json/custom-chatgpt/v1/ask'),
+        'botName' => get_option('chatgpt_bot_name', 'AI Agent'),
     ]);
 
     $bot_logo = get_option('chatgpt_bot_logo');
-    $bot_name = get_option('chatgpt_bot_name', 'TPT Bot');
+    $bot_name = get_option('chatgpt_bot_name', 'Bot');
     ?>
 
     <!-- Chatbot Toggle Icon -->
@@ -22,11 +23,24 @@ function render_chatgpt_in_footer() {
 
         <?php if ($bot_name): ?>
             <div id="chatgpt-name"><?php echo esc_html($bot_name); ?></div>
+		<hr>
         <?php endif; ?>
 
+		<div id="chatgpt-suggestions">
+    <div class="chatgpt-suggestion-buttons">
+        <p class="chatgpt-suggest">Try asking: ‘What are the best tours in [destination]?’ or ‘Can you plan a 3-day itinerary for [location]?’</p>
+        
+    </div>
+</div>
+		
+		
         <div id="chatgpt-history"></div>
-        <input type="text" id="chatgpt-input" placeholder="Ask your question...">
-        <div id="loading-msg">Bot is typing...</div>
+		<div id="loading-msg"><?php echo esc_html($bot_name); ?> is typing...</div>
+			<div id="chatgpt-input-wrapper">
+				
+        		<input type="text" id="chatgpt-input" placeholder="Ask your question...">
+				<button id="chatgpt-send">Send</button>
+			</div>
     </div>
 
 

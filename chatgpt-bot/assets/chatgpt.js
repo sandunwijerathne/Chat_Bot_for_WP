@@ -2,12 +2,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('chatgpt-input');
     const history = document.getElementById('chatgpt-history');
     const loading = document.getElementById('loading-msg');
-
+	const sendBtn = document.getElementById('chatgpt-send');
+	const chatgptsuggestions = document.getElementById('chatgpt-suggestions');
+	
     if (!input || !history || !loading) return;
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-            const msg = input.value.trim();
+			chatgptsuggestions.style.display = 'none';
+         sendMessage();
+        }
+    });
+	
+	sendBtn.addEventListener('click', function () {
+		chatgptsuggestions.style.display = 'none';
+   		 sendMessage();
+	});
+	
+// 	document.querySelectorAll('.chatgpt-suggest').forEach(button => {
+//     button.addEventListener('click', function () {
+// 		chatgptsuggestions.style.display = 'none';
+//         input.value = this.textContent;
+// //         sendMessage(); // Reuse your main function
+//     });
+// });
+	
+  function sendMessage() {  
+       const msg = input.value.trim();
             if (!msg) return;
 
             history.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
@@ -21,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then(res => res.json())
                 .then(data => {
-                   history.innerHTML += `<div><strong>Bot:</strong> <span class="chatgpt-bot-reply">${data}</span></div>`;
+                   history.innerHTML += `<div><strong>AI Agent:</strong> <span class="chatgpt-bot-reply">${data}</span></div>`;
 
                     history.scrollTop = history.scrollHeight;
                     loading.style.display = 'none';
@@ -30,11 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     history.innerHTML += `<div style="color:red;">Error talking to ChatGPT</div>`;
                     loading.style.display = 'none';
                 });
-        }
-    });
-    
-    
-    
+    }
+	
       const icon = document.getElementById('chatgpt-box-icon');
     const box = document.getElementById('chatgpt-box');
     
