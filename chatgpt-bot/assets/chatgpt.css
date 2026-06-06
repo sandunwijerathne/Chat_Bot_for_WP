@@ -6,18 +6,32 @@
     border: 1px solid #ddd;
     padding: 10px;
     width: 90%;
-	max-width:350px;
-    max-height:420px;
+    max-width: 350px;
+    max-height: 420px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     z-index: 9999;
+    /* CSS-driven open/close animation */
+    display: none;
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform-origin: bottom left;
 }
+
+#chatgpt-box.chatgpt-open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
 div#chatgpt-history div {
     margin: 7px 0;
 }
+
 div#chatgpt-box hr {
     margin: 0 !important;
 }
+
 #chatgpt-history {
     height: 320px;
     overflow-y: auto;
@@ -25,27 +39,19 @@ div#chatgpt-box hr {
     padding-bottom: 10px;
     font-size: 13px;
     margin-bottom: 10px;
-	color: #515151;
+    color: #515151;
 }
-#chatgpt-hint {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #333;
-    background: #f1f1f1;
-    padding: 8px 10px;
-    border-radius: 6px;
-    line-height: 1.5;
-}
+
 #chatgpt-input {
-    width: 100%;
+    flex: 1;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
+
 #loading-msg {
     display: none;
-/*     margin-top: 5px; */
-   	color: #666;
+    color: #666;
     position: absolute;
     bottom: 55px;
     font-size: 11px;
@@ -70,20 +76,17 @@ div#chatgpt-box-icon {
     cursor: pointer;
     box-shadow: 0 0 20px 0px #3e3e3e;
 }
+
+div#chatgpt-box-icon img {
+    width: 50px;
+}
+
 #chatgpt-input-wrapper {
     display: flex;
     gap: 8px;
     margin-top: 10px;
 }
-#chatgpt-input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-#chatgpt-send:hover {
-    background-color: #ef6a30;
-}
+
 #chatgpt-send {
     padding: 8px 12px;
     background-color: #f5972b;
@@ -92,22 +95,43 @@ div#chatgpt-box-icon {
     border-radius: 4px;
     cursor: pointer;
 }
-div#chatgpt-box-icon img {
-    width: 50px;
+
+#chatgpt-send:hover {
+    background-color: #ef6a30;
 }
-#chatgpt-box {
-    transition: height 0.3s ease;
-    overflow: hidden;
+
+#chatgpt-suggestions {
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-radius: 6px;
+    font-size: 14px;
+    position: absolute;
+    width: 95%;
 }
+
+.chatgpt-suggestion-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chatgpt-suggest {
+    padding: 8px 12px;
+    color: #8f8f8f;
+    border: 3px dashed #8f8f8f;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
 @media (max-width: 600px) {
-    #chatgpt-box-wrapper {
+    #chatgpt-box {
         left: 5%;
         right: 5%;
-        bottom: 10px;
+        bottom: 110px;
         width: 90%;
-    }
-
-    #chatgpt-box {
+        max-width: none;
         font-size: 12px;
     }
 
@@ -120,40 +144,7 @@ div#chatgpt-box-icon img {
     }
 
     #chatgpt-history {
+        height: auto;
         max-height: 50vh;
     }
 }
-/* .chatgpt-suggest {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 80% 85%, 75% 100%, 70% 85%, 0 85%);
-    height: 53px;
-    font-size: 11px;
-} */
-#chatgpt-suggestions {
-    margin-bottom: 12px;
-    padding: 8px 0px;
-    border-radius: 6px;
-    font-size: 14px;
-	position: absolute;
-	width: 95%;
-}
-
-.chatgpt-suggestion-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.chatgpt-suggest {
-      padding: 8px 12px;
-    color: #8f8f8f !important;
-    border: 3px dashed #8f8f8f;
-    border-radius: 5px;
-    text-align: left;
-    font-size: 13px;
-    transition: background-color 0.3s ease;
-  
-}
-
-/* .chatgpt-suggest:hover {
-    background-color: #ef6a30;
-} */

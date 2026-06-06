@@ -24,8 +24,10 @@ require_once CHATGPT_PLUGIN_DIR . 'includes/chatgpt-shortcode.php';
 // Enqueue assets
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('chatgpt-style', CHATGPT_PLUGIN_URL . 'assets/chatgpt.css');
-    wp_enqueue_script('chatgpt-script', CHATGPT_PLUGIN_URL . 'assets/chatgpt.js', ['jquery'], null, true);
+    wp_enqueue_script('chatgpt-script', CHATGPT_PLUGIN_URL . 'assets/chatgpt.js', [], null, true);
     wp_localize_script('chatgpt-script', 'chatgptAjax', [
         'ajaxUrl' => site_url('/wp-json/custom-chatgpt/v1/ask'),
+        'botName' => get_option('chatgpt_bot_name', 'AI Assistant'),
+        'nonce'   => wp_create_nonce('wp_rest'),
     ]);
 });
